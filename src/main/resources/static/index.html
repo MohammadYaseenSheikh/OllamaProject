@@ -1,17 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Ollama Project</title>
-</head>
+  <head>
+    <meta charset="UTF-8">
+    <title>Ollama 3.2</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./styles/index_style.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+  </head>
 <body>
-<div class="container">
-  <div class="row">
-    <div class="col-12 col-lg-12">
-      <div>input</div>
-      <div>result</div>
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Ollama Project</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#singlePromptSection">Single Prompt</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#resumeUploadSection">Upload Resume</a>
+          </li>
+        </ul>
+      </div>
     </div>
-</div>
-</div>
+  </nav>
+  <div class="container mt-5 pt-5">
+    <!-- Section 1: Single Prompt Input -->
+    <div id="singlePromptSection" class="card mb-4">
+      <div class="card-body">
+        <h2 class="card-title">Single Prompt</h2>
+        <input type="text" id="singlePrompt" class="form-control mb-2" placeholder="Enter your prompt">
+        <button class="btn btn-primary w-100" onclick="hitApi()">Submit</button>
+        <button class="btn btn-secondary w-100 mt-2" onclick="clearSinglePrompt()">Clear</button>
+        <div id="singlePromptResult" class="mt-3"></div>
+      </div>
+    </div>
+
+    <!-- Section 2: PDF Upload and Job Description -->
+    <div id="resumeUploadSection" class="card">
+      <div class="card-body">
+        <h2 class="card-title">Upload Resume and Job Description</h2>
+        <input type="file" id="resumeUpload" class="form-control mb-2" accept="application/pdf">
+        <textarea id="jobDescription" class="form-control mb-2" rows="5" placeholder="Enter Job Description"></textarea>
+        <button class="btn btn-primary w-100" onclick="uploadAndScore()">Upload and Score</button>
+        <button class="btn btn-secondary w-100 mt-2" onclick="clearResumeUpload()">Clear</button>
+        <div id="resumeScoreResult" class="mt-3"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    async function hitApi() {
+      const prompt = document.getElementById('singlePrompt').value;
+      const loadingSpinner = document.getElementById('loadingSpinner');
+      loadingSpinner.classList.remove('d-none');
+      
+      try {
+        const response = await fetch('/ai/lite', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ prompt })
+        });
+        const result = await response.json();
+        const resultElement = document.getElementById('singlePromptResult');
+        resultElement.innerText = result.result || 'Something went wrong!';
+        resultElement.style.opacity = 1;
+      } catch (error) {
+        const resultElement = document.getElementById('singlePromptResult');
+        resultElement.innerText = 'Something went wrong!';
+        resultElement.style.opacity = 1;
+      } finally {
+        loadingSpinner.classList.add('d-none');
+      }
+    }
+
+    async function uploadAndScore() {
+    const resume = document.getElementById('resumeUpload').files[0];
+    const jobDescription = document.getElementById('jobDescription').value;
+    const formData = new FormData();
+    formData.append('file', resume);
+    formData.append('job-description', jobDescription);
+    const loadingSpinner = document.getElementById('loadingSpinner');
+    loadingSpinner.classList.remove('d-none');
+
+    try {
+      const response = await fetch('/ai/resume-scanner', {
+        method: 'POST',
+        body: formData
+      });
+      const result = await response.json();
+      if (result.errorMessage) {
+        showError(result.errorMessage);
+      } else {
+        showScore(result.score, result.suggestion);
+      }
+    } catch (error) {
+      showError('Something went wrong!');
+    } finally {
+      loadingSpinner.classList.add('d-none');
+    }
+  }
+
+    function showError(message) {
+      const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+      document.getElementById('errorModalBody').innerText = message;
+      errorModal.show();
+      setTimeout(() => {
+        errorModal.hide();
+      }, 5000); // Hide after 5 seconds
+    }
+
+    function showScore(score, suggestion) {
+    const scoreElement = document.getElementById('resumeScoreResult');
+    const scoreValue = parseInt(score.match(/\d+/)[0]);
+    let alertClass = 'alert-danger'; // Default to red
+
+    if (scoreValue >= 7) {
+      alertClass = 'alert-success'; // Green for high scores
+    } else if (scoreValue >= 4) {
+      alertClass = 'alert-warning'; // Yellow for medium scores
+    }
+
+    scoreElement.innerHTML = `
+      <div class="alert ${alertClass} text-center" role="alert" style="color: black; font-weight: bold; font-size: 1.2em;">
+        ${score}
+      </div>
+      <div class="mt-3" style="color: black;">${suggestion.replace(/\n/g, '<br>')}</div>
+    `;
+    scoreElement.style.opacity = 1;
+  }
+
+    function clearSinglePrompt() {
+      document.getElementById('singlePrompt').value = ''; // Clear input box
+      document.getElementById('singlePromptResult').innerText = ''; // Clear output box
+      document.getElementById('singlePromptResult').style.opacity = 0;
+    }
+
+    function clearResumeUpload() {
+      document.getElementById('resumeUpload').value = ''; // Clear file input
+      document.getElementById('jobDescription').value = ''; // Clear textarea
+      document.getElementById('resumeScoreResult').innerText = ''; // Clear output box
+      document.getElementById('resumeScoreResult').style.opacity = 0;
+    }
+  </script>
+
+  <!-- Loading Spinner -->
+  <div id="loadingSpinner" class="d-none position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center" style="background: rgba(0, 0, 0, 0.5); z-index: 1050;">
+    <div class="spinner-border text-light" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  
 </body>
 </html>
