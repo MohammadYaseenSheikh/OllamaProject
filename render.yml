@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: springboot-app
+    env: java
+    plan: free
+    buildCommand: mvn clean package -DskipTests
+    startCommand: java -jar target/yourapp.jar  # Replace with your actual JAR file name
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: production
+      - key: PORT
+        value: 8080  # Render automatically sets this, but it's good practice to define
