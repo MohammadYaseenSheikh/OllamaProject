@@ -1,0 +1,54 @@
+body {
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    background-size: 200% 200%;
+    animation: gradientAnimation 10s ease infinite;
+    color: white;
+    overflow: hidden;
+  }
+  
+  @keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  #singlePromptResult, #resumeScoreResult {
+    max-height: 200px; /* Set a fixed height */
+    overflow-y: auto; /* Enable vertical scrolling */
+    border: 1px solid #ccc; /* Optional: Add a border for better visibility */
+    padding: 10px; /* Optional: Add padding for better readability */
+    background-color: #f8f9fa; /* Optional: Add a background color */
+  }
+  
+  .card-title {
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .card {
+    background: linear-gradient(to right, #ff7e5f, #feb47b); /* Gradient background for cards */
+    color: white;
+  }
+  
+  .navbar {
+    background: rgba(0, 0, 0, 0.4);
+  }
+  
+  .navbar .nav-link, .navbar .navbar-brand {
+    color: white !important;
+  }
+  
+  .navbar .nav-link:hover, .navbar .navbar-brand:hover {
+    color: #ffeb3b !important;
+  }
+  
+  .navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+  
+  .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 0.5%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+  }
