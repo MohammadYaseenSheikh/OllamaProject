@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.yaseen.code.deepseekproject.DeepseekProjectApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.047 s -- in com.yaseen.code.deepseekproject.DeepseekProjectApplicationTests
