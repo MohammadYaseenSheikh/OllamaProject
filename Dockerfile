@@ -4,7 +4,7 @@ WORKDIR /app
 COPY . .
 
 # Runtime stage
-FROM eclipse-temurin:21-jre
+FROM eclipse-temurin:23-jre
 WORKDIR /app
 COPY --from=builder /app/target/*.jar app.jar
 CMD ["java", "-jar", "app.jar"]
