@@ -6,7 +6,6 @@ WORKDIR /app
 
 # Copy Maven or Gradle build files (adjust based on your build tool)
 COPY mvnw pom.xml ./
-COPY .mvn .mvn
 COPY src src
 
 # Build the application (Maven example)
