@@ -1,10 +1,10 @@
 # Build stage
-FROM eclipse-temurin:21-jdk AS builder
+FROM eamazoncorretto:23 AS builder
 WORKDIR /app
 COPY . .
 
 # Runtime stage
-FROM eclipse-temurin:23-jre
+FROM amazoncorretto:23
 WORKDIR /app
 COPY --from=builder /app/target/*.jar app.jar
 CMD ["java", "-jar", "app.jar"]
