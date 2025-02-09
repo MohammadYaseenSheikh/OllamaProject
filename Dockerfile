@@ -8,9 +8,6 @@ WORKDIR /app
 COPY mvnw pom.xml ./
 COPY src src
 
-# Build the application (Maven example)
-RUN ./mvnw clean package -DskipTests
-
 # Use a minimal JDK runtime for production
 FROM eclipse-temurin:21-jre AS runtime
 
