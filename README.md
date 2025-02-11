@@ -16,7 +16,7 @@ AI is a powerful Spring Boot-based application integrating Ollama 3.2 for AI-pow
 - **Backend:** ⚙️ Spring Boot, Spring AI, Ollama 3.2
 - **Frontend:** 🎨 HTML, Bootstrap 5, JavaScript
 - **Build Tool:** 🛠️ Maven
-- **Deployment:** 🚧 Not yet deployed
+- **Deployment:** 🛜 Deployed on Render
 
 ## 📦 Installation & Setup
 1. **Clone the repository** 🛜:
