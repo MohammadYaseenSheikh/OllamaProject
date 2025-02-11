@@ -1,103 +1,84 @@
-# Ollama 3.2 AI Project
+# 🤖 AI Project
 
-Welcome to the Ollama 3.2 AI Project! This project provides two main services:
-1. **AI Prompt**: Ask a simple prompt and get an AI-generated response.
-2. **AI CV/Resume Scanner**: Upload your CV/Resume along with a job description to get a score and suggestions for improvement.
+## 🚀 Overview
+AI is a powerful Spring Boot-based application integrating Ollama 3.2 for AI-powered chat and resume scanning. This project enables users to:
 
-## Features
+✨ Submit text prompts for AI-generated responses.
+📄 Upload resumes to compare against job descriptions for suitability analysis.
 
-- **AI Prompt**: Enter a prompt and receive an AI-generated response.
-- **AI CV/Resume Scanner**: Upload your CV/Resume and a job description to get a detailed analysis and suggestions for improvement.
-- **Responsive Design**: The UI is designed to be responsive and user-friendly.
-- **Error Handling**: Displays error messages in a user-friendly manner.
+## ✨ Features
+- 🤖 AI-powered chat with Ollama 3.2
+- 📑 Resume scanner to analyze CVs against job descriptions
+- 🌐 Clean and interactive UI with HTML, CSS, and Bootstrap
+- 🔗 REST API endpoints for easy integration
 
-## Technologies Used
+## 🛠 Tech Stack
+- **Backend:** ⚙️ Spring Boot, Spring AI, Ollama 3.2
+- **Frontend:** 🎨 HTML, Bootstrap 5, JavaScript
+- **Build Tool:** 🛠️ Maven
+- **Deployment:** 🚧 Not yet deployed
 
-- **Frontend**: HTML, CSS, JavaScript, Bootstrap
-- **Backend**: Java Spring Boot
-- **AI Integration**: Ollama 3.2 Free version
+## 📦 Installation & Setup
+1. **Clone the repository** 🛜:
+   ```bash
+   git clone https://github.com/MohammadYaseenSheikh/OllamaProject.git
+   ```
+2. **Build the project** 🔨:
+   ```bash
+   ./mvnw clean install
+   ```
+3. **Run the application** ▶️:
+   ```bash
+   mvn spring-boot:run
+   ```
 
-## Installation
+## 📡 API Endpoints
+### 🔹 AI Chat
+**POST** `/ai/lite`
+- **Request Body:**
+  ```json
+  {"prompt": "Your question here"}
+  ```
+- **Response:**
+  ```json
+  {"result": "AI-generated answer"}
+  ```
 
-### Prerequisites
+### 📄 Resume Scanner
+**POST** `/ai/resume-scanner`
+- **Request Parameters:**
+  - `file`: Resume (PDF, max 5MB)
+  - `job-description`: Job description text
+- **Response:**
+  ```json
+  {"score": "your_score/10", "suggestions": "Improve your skills section.", "errorMessage":"error message if occurs"}
+  ```
 
-- Java 11 or higher
-- Maven
-- Node.js and npm (for frontend dependencies)
-
-### Steps
-
-1. **Clone the repository**:
-    ```sh
-    git clone https://github.com/your-username/ollama3.2-ai-project.git
-    cd ollama3.2-ai-project
-    ```
-
-2. **Backend Setup**:
-    - Navigate to the backend directory:
-      ```sh
-      cd backend
-      ```
-    - Build the project using Maven:
-      ```sh
-      mvn clean install
-      ```
-    - Run the Spring Boot application:
-      ```sh
-      mvn spring-boot:run
-      ```
-
-3. **Frontend Setup**:
-    - Navigate to the frontend directory:
-      ```sh
-      cd frontend
-      ```
-    - Install the dependencies:
-      ```sh
-      npm install
-      ```
-    - Start the frontend development server:
-      ```sh
-      npm start
-      ```
-
-## Usage
-
-### AI Prompt
-
-1. Enter your prompt in the input box.
-2. Click the "Ask AI" button to get a response.
-3. The response will be displayed below the input box.
-
-### AI CV/Resume Scanner
-
-1. Enter the job description in the text area.
-2. Click the paperclip icon to upload your CV/Resume (PDF format only).
-3. Click the "Scan CV by AI" button to get the analysis.
-4. The score and suggestions will be displayed below the text area.
-
-## Screenshots
-
-### AI Prompt
-![AI Prompt](screenshots/ai-prompt.png)
-
-### AI CV/Resume Scanner
-![AI CV/Resume Scanner](screenshots/ai-cv-scanner.png)
-
-## Contributing
-
-Contributions are welcome! Please fork the repository and submit a pull request.
-
-## License
-
-This project is licensed under the MIT License. See the LICENSE file for details.
-
-## Contact
-
-For any questions or feedback, please contact:
-- **Name**: Yaseen Sheikh
-- **Email**: yaseen@example.com
+## 🎨 UI Preview
+The project includes a modern and interactive UI with:
+- 📝 AI chat interface for prompt responses
+- 📂 Resume scanner with file upload and job description input
 
 ---
 
-Thank you for using the Ollama 3.2 AI Project!
+## 📸 Screenshots
+
+![DeepSeek AI](https://github.com/user-attachments/assets/1d7c2c59-64be-4754-85d5-f749b9153afb)
+
+---
+
+## 🚀 Future Enhancements
+- ☁️ Deploy to a cloud provider
+- 📊 Enhance AI analysis for better job matching
+- 🔍 Improve UI with real-time response updates
+
+## 👨‍💻 Author
+
+👤 **Mohammad Yaseen Sheikh**  
+📧 [Email](mailto:official.yaseen.sheikh@gmail.com)  
+🔗 [LinkedIn](https://www.linkedin.com/in/mohammad-yaseen-sheikh-55484915a/)  
+
+---
+
+⭐ If you like this project, give it a **star** on GitHub! 🌟
+
