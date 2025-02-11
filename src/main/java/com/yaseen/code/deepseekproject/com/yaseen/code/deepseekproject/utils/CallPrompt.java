@@ -14,7 +14,7 @@ public class CallPrompt {
 
     private final RestTemplate restTemplate;
     private final String API_URL = "https://api.together.xyz/v1/chat/completions";
-    private final String API_KEY = "Confidentiality-Key";
+    private final String API_KEY = "Confidential-Key";
 
     public CallPrompt(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
