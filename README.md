@@ -63,7 +63,12 @@ The project includes a modern and interactive UI with:
 
 ## 📸 Screenshots
 
-![img.png](img.png)
+- Login Page
+![img_1.png](img_1.png)
+- Registration Page
+![img_2.png](img_2.png)
+- Home Page
+![img_4.png](img_4.png)
 
 ---
 
