@@ -1,11 +1,14 @@
 /Users/rabbani.firdous/Documents/OllamaProject/src/main/java/com/yaseen/code/deepseekproject/DeepseekProjectApplication.java
 /Users/rabbani.firdous/Documents/OllamaProject/src/main/java/com/yaseen/code/deepseekproject/com/yaseen/code/deepseekproject/config/AppConfig.java
-/Users/rabbani.firdous/Documents/OllamaProject/src/main/java/com/yaseen/code/deepseekproject/com/yaseen/code/deepseekproject/config/WebConfig.java
+/Users/rabbani.firdous/Documents/OllamaProject/src/main/java/com/yaseen/code/deepseekproject/com/yaseen/code/deepseekproject/config/SecurityConfiguration.java
 /Users/rabbani.firdous/Documents/OllamaProject/src/main/java/com/yaseen/code/deepseekproject/com/yaseen/code/deepseekproject/controller/AIController.java
+/Users/rabbani.firdous/Documents/OllamaProject/src/main/java/com/yaseen/code/deepseekproject/com/yaseen/code/deepseekproject/controller/HomeController.java
+/Users/rabbani.firdous/Documents/OllamaProject/src/main/java/com/yaseen/code/deepseekproject/com/yaseen/code/deepseekproject/controller/UserController.java
 /Users/rabbani.firdous/Documents/OllamaProject/src/main/java/com/yaseen/code/deepseekproject/com/yaseen/code/deepseekproject/model/CVResponse.java
 /Users/rabbani.firdous/Documents/OllamaProject/src/main/java/com/yaseen/code/deepseekproject/com/yaseen/code/deepseekproject/model/PromptRequest.java
 /Users/rabbani.firdous/Documents/OllamaProject/src/main/java/com/yaseen/code/deepseekproject/com/yaseen/code/deepseekproject/model/PromptResponse.java
 /Users/rabbani.firdous/Documents/OllamaProject/src/main/java/com/yaseen/code/deepseekproject/com/yaseen/code/deepseekproject/model/TogetherAIResponse.java
+/Users/rabbani.firdous/Documents/OllamaProject/src/main/java/com/yaseen/code/deepseekproject/com/yaseen/code/deepseekproject/model/User.java
 /Users/rabbani.firdous/Documents/OllamaProject/src/main/java/com/yaseen/code/deepseekproject/com/yaseen/code/deepseekproject/service/AIService.java
 /Users/rabbani.firdous/Documents/OllamaProject/src/main/java/com/yaseen/code/deepseekproject/com/yaseen/code/deepseekproject/service/AIServiceImplementation.java
 /Users/rabbani.firdous/Documents/OllamaProject/src/main/java/com/yaseen/code/deepseekproject/com/yaseen/code/deepseekproject/utils/CallPrompt.java

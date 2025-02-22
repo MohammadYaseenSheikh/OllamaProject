@@ -1,7 +1,3 @@
-a {
-    margin-top: 10px;
-}
-
 .cards{
     display: flex;
     flex-wrap: wrap;
@@ -9,15 +5,14 @@ a {
 }
 
 .card {
-    margin-bottom: 10px;
     text-align: center;
-    width: 70%;
     color: white;
 }
 
 body {
     margin: 20px;
     background: linear-gradient(45deg, #007BFF, #5bdf37);
+    background-attachment: fixed;
     color: white;
     padding: 20px;
 }
@@ -70,4 +65,8 @@ footer{
 .input-group-text {
     margin-left: 5px;
     cursor: pointer; /* Change cursor to pointer for the clickable label */
+}
+
+.navbar-brand{
+    margin-top: 0px;
 }

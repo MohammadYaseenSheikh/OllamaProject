@@ -3,7 +3,7 @@ package com.yaseen.code.deepseekproject.com.yaseen.code.deepseekproject.controll
 import com.yaseen.code.deepseekproject.com.yaseen.code.deepseekproject.model.CVResponse;
 import com.yaseen.code.deepseekproject.com.yaseen.code.deepseekproject.model.PromptRequest;
 import com.yaseen.code.deepseekproject.com.yaseen.code.deepseekproject.model.PromptResponse;
-import com.yaseen.code.deepseekproject.com.yaseen.code.deepseekproject.service.AIServiceImplementation;
+import com.yaseen.code.deepseekproject.com.yaseen.code.deepseekproject.service.impl.AIServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("/ai")
+@RequestMapping("home/ai")
 public class AIController {
 
     @Autowired

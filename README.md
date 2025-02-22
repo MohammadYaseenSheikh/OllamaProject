@@ -63,7 +63,7 @@ The project includes a modern and interactive UI with:
 
 ## 📸 Screenshots
 
-![DeepSeek AI](https://github.com/user-attachments/assets/1d7c2c59-64be-4754-85d5-f749b9153afb)
+![img.png](img.png)
 
 ---
 
