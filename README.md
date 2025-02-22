@@ -82,8 +82,8 @@ The project includes a modern and interactive UI with:
 ## 👨‍💻 Author
 
 👤 **Mohammad Yaseen Sheikh**  
-📧 [Email](mailto:official.yaseen.sheikh@gmail.com)  official.yaseen.sheikh@gmail.com
-🔗 [LinkedIn](https://www.linkedin.com/in/mohammad-yaseen-sheikh-55484915a/)  www.linkedin.com/in/mohammad-yaseen-sheikh-55484915a/
+📧 official.yaseen.sheikh@gmail.com
+🔗 www.linkedin.com/in/mohammad-yaseen-sheikh-55484915a/
 
 ---
 
