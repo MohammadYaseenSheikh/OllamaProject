@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("home/ai")
+@RequestMapping("/ai")
 public class AIController {
 
     @Autowired
