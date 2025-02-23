@@ -24,7 +24,6 @@ footer{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #dfe1e3e9; /* Optional: Add a background color */
     padding: 10px;
     width: 100%;
     position: relative;
@@ -51,7 +50,7 @@ footer{
     outline: none;
 }
 
-#cvJDInputBox {
+#cvJDInputBox, #promptInputBox{
     height: 100px;
     border-radius: 5px;
     resize: none; /* Prevent resizing of the textarea */

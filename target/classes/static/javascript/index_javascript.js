@@ -122,5 +122,15 @@ function logout() {
         .catch(error => console.error("Logout failed:", error));
 }
 
+function copyToClipboard(elementId) {
+    const textarea = document.getElementById(elementId);
+    textarea.select();
+    navigator.clipboard.writeText(textarea.value).then(() => {
+        console.log('Text copied to clipboard');
+    }).catch(err => {
+        console.error('Failed to copy text: ', err);
+    });
+}
+
 // Call fetchUserDetails on page load
 document.addEventListener('DOMContentLoaded', fetchUserDetails);
