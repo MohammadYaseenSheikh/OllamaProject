@@ -11,8 +11,7 @@
 
 body {
     margin: 20px;
-    background: linear-gradient(45deg, #007BFF, #5bdf37);
-    background-attachment: fixed;
+    background: linear-gradient(45deg, #007BFF, #5bdf37) fixed;
     color: white;
     padding: 20px;
 }
