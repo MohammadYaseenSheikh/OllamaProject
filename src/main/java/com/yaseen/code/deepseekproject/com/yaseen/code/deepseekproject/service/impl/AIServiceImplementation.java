@@ -15,11 +15,14 @@ import java.io.IOException;
 @Service
 public class AIServiceImplementation implements AIService {
 
-    @Autowired
-    private CallPrompt callPrompt;
+    private final CallPrompt callPrompt;
+    private final ExtractPDFText extractPDFText;
 
     @Autowired
-    private ExtractPDFText extractPDFText;
+    public AIServiceImplementation(CallPrompt callPrompt, ExtractPDFText extractPDFText) {
+        this.callPrompt = callPrompt;
+        this.extractPDFText = extractPDFText;
+    }
 
     @Override
     public PromptResponse getLiteResponse(String prompt) {

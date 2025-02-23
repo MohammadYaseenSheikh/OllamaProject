@@ -3,8 +3,10 @@ package com.yaseen.code.deepseekproject.com.yaseen.code.deepseekproject.controll
 import com.yaseen.code.deepseekproject.com.yaseen.code.deepseekproject.model.CVResponse;
 import com.yaseen.code.deepseekproject.com.yaseen.code.deepseekproject.model.PromptRequest;
 import com.yaseen.code.deepseekproject.com.yaseen.code.deepseekproject.model.PromptResponse;
+import com.yaseen.code.deepseekproject.com.yaseen.code.deepseekproject.service.AIService;
 import com.yaseen.code.deepseekproject.com.yaseen.code.deepseekproject.service.impl.AIServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,11 +19,8 @@ import java.io.IOException;
 @RequestMapping("/ai")
 public class AIController {
 
-    private final AIServiceImplementation service;
-
-    AIController() {
-        this.service = new AIServiceImplementation();
-    }
+    @Autowired
+    AIServiceImplementation aiService;
 
     @PostMapping(value = "/lite", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<PromptResponse> chat(@RequestBody PromptRequest request) {
@@ -30,7 +29,7 @@ public class AIController {
         if (prompt == null || prompt.isEmpty()) {
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(service.getLiteResponse(prompt), HttpStatus.OK);
+        return new ResponseEntity<>(aiService.getLiteResponse(prompt), HttpStatus.OK);
     }
 
     @PostMapping(
@@ -47,7 +46,7 @@ public class AIController {
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
         try{
-            return new ResponseEntity<>(service.evaluateResume(resume, jobDescription), HttpStatus.OK);
+            return new ResponseEntity<>(aiService.evaluateResume(resume, jobDescription), HttpStatus.OK);
         } catch (IOException e) {
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }

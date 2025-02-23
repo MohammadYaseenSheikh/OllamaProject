@@ -2,7 +2,7 @@ const globalError = "An error occurred. Please try again later.";
 
 function getResponse(){
     var data = document.getElementById("promptInputBox").value;
-    const url = "https://ollamaproject.onrender.com/ai/lite";
+    const url = "/ai/lite";
     const prompt = data
     const options = {
         method: 'POST',
@@ -33,7 +33,7 @@ function getResponse(){
 function getCVResponse(){
     var jobDescription = document.getElementById("cvJDInputBox").value;
     var cv = document.getElementById("cvInputBox");
-    const url = "https://ollamaproject.onrender.com/ai/resume-scanner";
+    const url = "/ai/resume-scanner";
 
     if (cv.files.length === 0) {
         alert("Please upload a CV!");
