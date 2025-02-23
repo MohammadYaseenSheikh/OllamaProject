@@ -1,5 +1,6 @@
 package com.yaseen.code.deepseekproject.com.yaseen.code.deepseekproject.utils;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -14,7 +15,9 @@ public class CallPrompt {
 
     private final RestTemplate restTemplate;
     private final String API_URL = "https://api.together.xyz/v1/chat/completions";
-    private final String API_KEY = "Confidential-Key";
+
+    @Value("${ollama.together.api.key}")
+    private String API_KEY;
 
     public CallPrompt(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
