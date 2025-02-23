@@ -1,0 +1,71 @@
+.cards{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    text-align: center;
+    color: white;
+}
+
+body {
+    margin: 20px;
+    background: linear-gradient(45deg, #007BFF, #5bdf37) fixed;
+    color: white;
+    padding: 20px;
+}
+
+#content-text {
+    color: white;
+}
+
+footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #dfe1e3e9; /* Optional: Add a background color */
+    padding: 10px;
+    width: 100%;
+    position: relative;
+    bottom: 0;
+}
+
+.card-text{
+    color: rgb(88, 85, 85);
+}
+
+#responseBox, #cvResponseBox {
+    visibility: hidden;
+    max-height: 200px;
+    overflow-y: scroll;
+    text-align: left;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 2px solid rgba(49, 100, 239, 0.322);
+    box-sizing: border-box;
+}
+
+#responseBox:focus{
+    background-color: rgba(131, 159, 237, 0.24);
+    outline: none;
+}
+
+#cvJDInputBox {
+    height: 100px;
+    border-radius: 5px;
+    resize: none; /* Prevent resizing of the textarea */
+}
+
+#cvInputColorBox {
+    border-radius: 5px;
+}
+  
+.input-group-text {
+    margin-left: 5px;
+    cursor: pointer; /* Change cursor to pointer for the clickable label */
+}
+
+.navbar-brand{
+    margin-top: 0px;
+}

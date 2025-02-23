@@ -1,3 +1,11 @@
 /target/classes/.vscode/settings.json
 .DS_Store
-.gitignore
+target/
+*.iml
+.idea/
+*.log
+*.class
+*.jar
+*.war
+node_modules/
+
