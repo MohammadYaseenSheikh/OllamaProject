@@ -9,6 +9,7 @@ com/yaseen/code/deepseekproject/com/yaseen/code/deepseekproject/model/dto/User.c
 com/yaseen/code/deepseekproject/com/yaseen/code/deepseekproject/config/AppConfig.class
 com/yaseen/code/deepseekproject/com/yaseen/code/deepseekproject/config/CustomOAuth2UserService.class
 com/yaseen/code/deepseekproject/com/yaseen/code/deepseekproject/service/UserService.class
+com/yaseen/code/deepseekproject/com/yaseen/code/deepseekproject/config/CorsConfig$1.class
 com/yaseen/code/deepseekproject/com/yaseen/code/deepseekproject/model/PromptResponse.class
 com/yaseen/code/deepseekproject/com/yaseen/code/deepseekproject/service/impl/UserServiceImplementation.class
 com/yaseen/code/deepseekproject/com/yaseen/code/deepseekproject/controller/AIController.class

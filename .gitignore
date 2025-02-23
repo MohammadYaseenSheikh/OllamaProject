@@ -4,8 +4,6 @@ target/
 *.iml
 .idea/
 *.log
-*.class
-*.jar
 *.war
 node_modules/
 
