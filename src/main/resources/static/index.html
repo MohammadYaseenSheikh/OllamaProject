@@ -53,28 +53,28 @@
             </div>
         </div>
         <div class="col-12">
-            <div class="card mb-3">
+            <div class="card mb-5">
                 <div class="card-body">
                     <h5 class="card-title">AI CV/Resume Scanner</h5>
                     <p>Upload your CV/Resume to get the AI analysis</p>
                     <div class="input-group mb-3">
                         <textarea class="form-control" id="cvJDInputBox" placeholder="Enter your Job Description here"></textarea>
-                        <div class="input-group-append">
-                            <label class="input-group-text bg-secondary text-white" id="cvInputColorBox" for="cvInputBox">
-                                <i id="cvIcon" class="bi bi-paperclip"></i>
-                            </label>
-                            <input type="file" class="form-control d-none" id="cvInputBox" accept=".pdf">
-                        </div>
                     </div>
-                    <button class="btn btn-primary" onclick="getCVResponse()">Scan CV by AI</button>
-                    <button class="btn btn-secondary" id="clearCvBtn">Clear</button>
-                    <div id="cvResponseBox" class="mt-3"></div>
+                    <div class="d-flex flex-column flex-md-row align-items-center justify-content-center mt-2">
+                        <label class="input-group-text bg-secondary text-white mb-2 mb-md-0" id="cvInputColorBox" for="cvInputBox">
+                            <i id="cvIcon" class="bi bi-paperclip"></i> Upload CV/Resume
+                        </label>
+                        <input type="file" class="form-control d-none" id="cvInputBox" accept=".pdf" onchange="handleFileUpload()">
+                        <button class="btn btn-primary ms-md-2 mb-2 mb-md-0" onclick="getCVResponse()">Scan CV by AI</button>
+                        <button class="btn btn-secondary ms-md-2" id="clearCvBtn" onclick="clearCV_Card()">Clear</button>
+                    </div>
+                    <div id="cvResponseBox" class="mt-3 mb-3"></div>
                 </div>
             </div>
         </div>
     </div>
 </main>
-<footer class="text-white text-center mt-4" style="margin: 0; padding: 1rem; width: 100%; position: fixed; bottom: 0; left: 0; background-color: #2b2b2c;">
+<footer class="text-white text-center mt-4" style="margin: 0; width: 100%; position: fixed; bottom: 0; left: 0; background-color: #2b2b2c;">
     <span>&copy; 2023 Ollama Project. All rights reserved. Developed by
         <a href="https://github.com/MohammadYaseenSheikh/OllamaProject/blob/main/README.md" style="text-decoration: none; color: inherit;">
             <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub Logo" style="width: 20px; height: 20px; border-radius: 50%;margin-top: -3px;"/>
@@ -82,32 +82,6 @@
         </a>. For professional use only.
     </span>
 </footer>
-<script>
-    // Fetch logged-in user details
-    function fetchUserDetails() {
-        fetch('/user', { method: 'GET', credentials: 'include' })
-            .then(response => response.json())
-            .then(data => {
-                if (data.username) {
-                    document.getElementById("usernameDisplay").textContent = "Welcome, " + data.username;
-                } else {
-                    document.getElementById("usernameDisplay").textContent = "Guest";
-                }
-            })
-            .catch(error => console.error("Error fetching user data:", error));
-    }
-
-    // Logout function
-    function logout() {
-        fetch('/logout', { method: 'POST', credentials: 'include' })
-            .then(() => {
-                window.location.href = "/login.html";
-            })
-            .catch(error => console.error("Logout failed:", error));
-    }
-
-    // Call function when page loads
-    fetchUserDetails();
-</script>
+<script src="javascript/index_javascript.js"></script>
 </body>
 </html>

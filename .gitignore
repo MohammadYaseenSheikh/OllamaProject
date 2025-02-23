@@ -1,6 +1,5 @@
 /target/classes/.vscode/settings.json
 .DS_Store
-target/
 *.iml
 .idea/
 *.log

@@ -10,9 +10,9 @@
     </parent>
     <groupId>com.yaseen.code</groupId>
     <artifactId>deepseek-project</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-SNAPSHOT</version>
     <name>deepseek-project</name>
-    <description>deepseek-project</description>
+    <description>This Snapshot has a Login functionality implementation.</description>
     <url/>
     <licenses>
         <license/>
