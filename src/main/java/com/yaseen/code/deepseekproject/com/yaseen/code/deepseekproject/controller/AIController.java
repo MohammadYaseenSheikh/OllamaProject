@@ -29,7 +29,8 @@ public class AIController {
         if (prompt == null || prompt.isEmpty()) {
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(aiService.getLiteResponse(prompt), HttpStatus.OK);
+        response = aiService.getLiteResponse(prompt);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PostMapping(

@@ -33,25 +33,8 @@ public class AIServiceImplementation implements AIService {
     @Override
     public CVResponse evaluateResume(MultipartFile resume, String jobDescription) throws IOException {
         String resumeText = extractPDFText.extractTextFromPDF(resume);
-        String prompt =
-                "Evaluate the following resume against the provided job description. Please provide the output in below format shown below Only." +
-                        "\nFollow strict below format only No extra input before or after the given format." +
-                        "Score: [Only Score]/10,\n" +
-                        "Suggestion: [Only areas to improve with in 100 words only.]\n" +
-                        "\n" +
-                        "Below are the inputs:\n" +
-                        "- Job Description:\n" +
-                        jobDescription +
-                        "\n" +
-                        "- Resume:\n" +
-                        resumeText +
-                        "\n" +
-                        "Make sure to:\n" +
-                        "- Be consistent in scoring based on relevance to the job description.\n" +
-                        "- Only mention areas of improvement if the score is less than 10, and keep them concise and actionable.\n" +
-                        "- Don't mention generic statements; focus solely on the **specific skills and qualifications** that are relevant to the job description and what needs to be improved for a better match.\n";
-        String response = JsonParser.parseResponse(callPrompt.getAIResponse(prompt)).choices.getFirst().message.content;
-//        String[] result = response.split("\n\n");
+        String analysis = callPrompt.getAICVResponse(resumeText, jobDescription);
+        String response = JsonParser.parseResponse(analysis).choices.getFirst().message.content;
 
         return new CVResponse("", response);
     }

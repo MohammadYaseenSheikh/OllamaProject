@@ -1,70 +1,152 @@
-.cards{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.card {
-    text-align: center;
-    color: white;
-}
-
+/* Base Styles */
 body {
-    margin: 20px;
-    background: linear-gradient(45deg, #007BFF, #5bdf37) fixed;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background-attachment: fixed;
     color: white;
     padding: 20px;
 }
 
-#content-text {
-    color: white;
+/* Glassmorphism Effect */
+.glass-card {
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    transition: transform 0.3s ease;
 }
 
-footer{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    width: 100%;
+.glass-card:hover {
+    transform: translateY(-5px);
+}
+
+.glass-input {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: white !important;
+}
+
+.glass-input::placeholder {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Custom File Upload */
+.custom-file-upload {
     position: relative;
-    bottom: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
 }
 
-.card-text{
-    color: rgb(88, 85, 85);
+.custom-file-upload input[type="file"] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
 }
 
+/* Response Boxes */
 #responseBox, #cvResponseBox {
     visibility: hidden;
-    max-height: 200px;
-    overflow-y: scroll;
-    text-align: left;
-    margin-top: 10px;
-    border-radius: 5px;
-    border: 2px solid rgba(49, 100, 239, 0.322);
-    box-sizing: border-box;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    color: white;
+    min-height: 150px;
+    max-height: 50vh; /* Use viewport height units */
+    overflow-y: auto;
+    padding: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    resize: vertical; /* Allow vertical resizing on desktop */
+    width: 100%;
+    transition: all 0.3s ease;
 }
 
-#responseBox:focus{
-    background-color: rgba(131, 159, 237, 0.24);
-    outline: none;
+/* Mobile-specific adjustments */
+@media (max-width: 768px) {
+    #responseBox, #cvResponseBox {
+        max-height: 40vh; /* Smaller height for mobile */
+        resize: none; /* Disable resizing on mobile */
+        font-size: 14px; /* Better readability on small screens */
+    }
+    
+    /* Improve scrollability on mobile */
+    .response-container {
+        -webkit-overflow-scrolling: touch; /* Smooth scroll on iOS */
+    }
 }
 
-#cvJDInputBox, #promptInputBox{
-    height: 100px;
-    border-radius: 5px;
-    resize: none; /* Prevent resizing of the textarea */
+/* Enhanced Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 6px;
 }
 
-#cvInputColorBox {
-    border-radius: 5px;
-}
-  
-.input-group-text {
-    margin-left: 5px;
-    cursor: pointer; /* Change cursor to pointer for the clickable label */
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
 }
 
-.navbar-brand{
-    margin-top: 0px;
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+}
+
+/* Add this for better text rendering */
+.response-text {
+    white-space: pre-wrap;
+    word-break: break-word;
+    line-height: 1.6;
+}
+
+/* Improve mobile navbar spacing */
+.navbar-toggler {
+    margin-right: 10px;
+}
+
+.navbar-nav {
+    padding: 10px 0;
+}
+
+@media (max-width: 991px) {
+    .nav-item.me-3 {
+        margin-right: 0 !important;
+        margin-bottom: 10px;
+    }
+    
+    .navbar-collapse {
+        padding-top: 15px;
+    }
+}
+
+/* Copy Button Styles */
+.btn-copy {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    transition: all 0.3s ease;
+    padding: 5px 10px;
+    font-size: 0.8rem;
+}
+
+.btn-copy:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+}
+
+.btn-copy:active {
+    transform: translateY(0);
+}
+
+.btn-copy.success {
+    background: rgba(40, 167, 69, 0.9);
+    border-color: #28a745;
+}
+
+@media (max-width: 768px) {
+    .btn-copy {
+        top: 5px;
+        right: 5px;
+        padding: 4px 8px;
+    }
 }

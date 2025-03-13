@@ -22,7 +22,7 @@ public class SecurityConfiguration {
         http
                 .csrf(AbstractHttpConfigurer::disable) // Disable CSRF for testing
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/login.html", "/user/register", "/register.html").permitAll()
+                        .requestMatchers("/", "/login.html", "/user/register").permitAll()
                         .requestMatchers("/api/user/details").authenticated()
                         .anyRequest().authenticated()) // Protect other routes
                 .formLogin(login -> login
@@ -38,7 +38,6 @@ public class SecurityConfiguration {
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/login.html")
                         .permitAll());
-
         return http.build();
     }
 

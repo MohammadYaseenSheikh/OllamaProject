@@ -13,16 +13,22 @@ function getResponse(){
     };
     fetch(url, options)
     .then(response => {
-        if(!response.ok){
-            console.log(error);
-            alert(globalError);
-        }else{
-            return response.json();
+        if (!response.ok) {
+            throw new Error(globalError);
         }
+        return response.text(); // Use text() instead of json() to handle empty responses
     })
-    .then(responseData => {
-        document.getElementById("responseBox").innerText = responseData.result;
-        document.getElementById("responseBox").style.visibility = "visible";
+    .then(text => {
+        console.log("Response Text:", text); // Log the response text for debugging
+        if (text) {
+            const responseData = JSON.parse(text);
+            const responseBox = document.getElementById("responseBox");
+            const responseText = responseBox.querySelector(".response-text");
+            responseText.textContent = responseData.result;
+            responseBox.style.visibility = "visible";
+        } else {
+            throw new Error(globalError);
+        }
     })
     .catch(error => {
         console.log(error);
@@ -50,32 +56,45 @@ function getCVResponse(){
     };
     fetch(url, options)
     .then(response => {
-        if(!response.ok){
-            alert(globalError);
-        }else{
-            return response.json();
+        if (!response.ok) {
+            throw new Error(globalError);
+        }
+        return response.text(); // Use text() instead of json() to handle empty responses
+    })
+    .then(text => {
+        console.log("Response Text:", text); // Log the response text for debugging
+        if (text) {
+            const responseData = JSON.parse(text);
+            const suggestionData = JSON.parse(responseData.suggestion); // Parse the suggestion string
+            const responseBox = document.getElementById("cvResponseBox");
+            const responseText = responseBox.querySelector(".response-text");
+            responseText.innerHTML = `<strong>Score:</strong> ${suggestionData.score}<br><strong>Suggestions:</strong><ul>${suggestionData.suggestions.map(suggestion => `<li>${suggestion}</li>`).join('')}</ul>`;
+            responseBox.style.visibility = "visible";
+        } else {
+            throw new Error(globalError);
         }
     })
-    .then(responseData => {
-        document.getElementById("cvResponseBox").innerText = responseData.suggestion;
-        document.getElementById("cvResponseBox").style.visibility = "visible";
-    })
     .catch(error => {
+        console.log(error);
         alert(globalError);
     });
 }
 
 function clearPrompt_Card(){
     document.getElementById("promptInputBox").value = "";
-    document.getElementById("responseBox").innerText = "";
-    document.getElementById("responseBox").style.visibility = "hidden";
+    const responseBox = document.getElementById("responseBox");
+    const responseText = responseBox.querySelector(".response-text");
+    responseText.textContent = "";
+    responseBox.style.visibility = "hidden";
 }
 
 function clearCV_Card(){
     document.getElementById("cvInputBox").value = "";
     document.getElementById("cvJDInputBox").value = "";
-    document.getElementById("cvResponseBox").innerText = "";
-    document.getElementById("cvResponseBox").style.visibility = "hidden";
+    const responseBox = document.getElementById("cvResponseBox");
+    const responseText = responseBox.querySelector(".response-text");
+    responseText.textContent = "";
+    responseBox.style.visibility = "hidden";
     const fileLabel = document.getElementById('cvInputColorBox');
     const fileIcon = document.getElementById('cvIcon');
     fileLabel.classList.remove('bg-success');
@@ -124,12 +143,13 @@ function logout() {
 
 function copyToClipboard(elementId) {
     const textarea = document.getElementById(elementId);
-    textarea.select();
-    navigator.clipboard.writeText(textarea.value).then(() => {
-        console.log('Text copied to clipboard');
-    }).catch(err => {
-        console.error('Failed to copy text: ', err);
-    });
+    navigator.clipboard.writeText(textarea.value)
+        .then(() => {
+            console.log('Text copied to clipboard');
+        })
+        .catch(err => {
+            console.error('Failed to copy text: ', err);
+        });
 }
 
 // Call fetchUserDetails on page load
