@@ -72,6 +72,7 @@ The project includes a modern and interactive UI with:
 
 ### 🏠 Home Page
 ![image](https://github.com/user-attachments/assets/80e917ff-5a19-4223-944c-202bda15c7bb)
+![image](https://github.com/user-attachments/assets/49216642-c5c1-459e-a89c-5f5b06347848)
 
 ---
 
