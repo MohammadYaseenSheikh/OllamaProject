@@ -64,7 +64,7 @@ The project includes a modern and interactive UI with:
 ## 📸 Screenshots
 
 ### 🔑 Login Page
-![image](https://github.com/user-attachments/assets/53a726c5-06ca-42b1-bd6b-78b394eccfa8)
+![image](https://github.com/user-attachments/assets/b6fbf48d-b276-4b30-a016-f6bab6811334)
 
 ### 📝 Registration Page
 ![image](https://github.com/user-attachments/assets/da4291f7-aa7e-4666-838a-18d504a27583)
@@ -72,7 +72,6 @@ The project includes a modern and interactive UI with:
 
 ### 🏠 Home Page
 ![image](https://github.com/user-attachments/assets/80e917ff-5a19-4223-944c-202bda15c7bb)
-![Uploading image.png…]()
 
 ---
 
