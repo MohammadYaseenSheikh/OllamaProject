@@ -27,7 +27,7 @@ stages:
     - script: java -version
       displayName: 'Verify Java Installation'
 
-    - script: ./mvnw test
+    - script: mvn test
       displayName: Run unit tests
 
 - stage: Build
@@ -42,7 +42,7 @@ stages:
     - script: java -version
       displayName: 'Verify Java Installation'
 
-    - script: ./mvnw clean package -DskipTests
+    - script: mvn clean package -DskipTests
       displayName: Build Java project
 
     - task: Docker@2
