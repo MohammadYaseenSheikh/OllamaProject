@@ -1,11 +1,5 @@
-# Docker + Java CI/CD Pipeline
-# Builds, tests, and pushes Docker image to Azure Container Registry
-
 trigger:
 - main
-
-resources:
-- repo: self
 
 variables:
   dockerRegistryServiceConnection: '50c997e3-974c-4065-9e33-96c102bdf223'
@@ -30,6 +24,7 @@ stages:
 
 - stage: Build
   displayName: Build and Push Docker Image
+  # dependsOn removed
   jobs:
   - job: Build
     displayName: Build and Push
