@@ -10,8 +10,8 @@ RUN apt-get update && apt-get install -y maven
 # Copy source code
 COPY . .
 
-# Build the JAR using system Maven
+# Build the JAR using Maven
 RUN mvn clean package -DskipTests
 
-# Run the application
-CMD ["java", "-jar", "target/app.jar"]
+# Run the application (adjust JAR name if needed)
+CMD ["java", "-jar", "target/resume-scanner-1.0.jar"]

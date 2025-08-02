@@ -1,9 +1,6 @@
 trigger:
   - main
 
-resources:
-  - repo: self
-
 variables:
   dockerRegistryServiceConnection: '50c997e3-974c-4065-9e33-96c102bdf223'
   imageRepository: 'mohammadyaseensheikhollamaproject'
@@ -50,13 +47,14 @@ stages:
             displayName: 'Verify Java Installation'
 
           - task: Maven@3
+            displayName: 'Build JAR'
             inputs:
               mavenPomFile: 'pom.xml'
               goals: 'clean install'
               options: '-X'
 
           - task: Docker@2
-            displayName: Build and push Docker image to ACR
+            displayName: 'Build and Push Docker Image to ACR'
             inputs:
               command: buildAndPush
               repository: $(imageRepository)
@@ -66,6 +64,13 @@ stages:
                 $(tag)
                 latest
               buildContext: .
-              addPipelineData: true
+
+          - task: CopyFiles@2
+            displayName: 'Copy JAR to Artifact Staging'
+            inputs:
+              SourceFolder: '$(Build.SourcesDirectory)'
+              Contents: '**/target/*.jar'
+              TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
           - publish: $(Build.ArtifactStagingDirectory)
+            displayName: 'Publish Build Artifacts'
