@@ -24,11 +24,8 @@ stages:
     pool:
       name: SelfHostedPool
     steps:
-    - task: JavaToolInstaller@0
-      inputs:
-        versionSpec: '21'
-        jdkArchitectureOption: 'x64'
-        jdkSourceOption: 'PreInstalled'
+    - script: java -version
+      displayName: 'Verify Java Installation'
 
     - script: ./mvnw test
       displayName: Run unit tests
@@ -42,11 +39,8 @@ stages:
     pool:
       name: SelfHostedPool
     steps:
-    - task: JavaToolInstaller@0
-      inputs:
-        versionSpec: '21'
-        jdkArchitectureOption: 'x64'
-        jdkSourceOption: 'PreInstalled'
+    - script: java -version
+      displayName: 'Verify Java Installation'
 
     - script: ./mvnw clean package -DskipTests
       displayName: Build Java project
