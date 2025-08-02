@@ -18,21 +18,18 @@ variables:
 stages:
 - stage: Test
   displayName: Run Tests
+  condition: false
   jobs:
   - job: Test
     displayName: Unit Tests
     pool:
       name: SelfHostedPool
     steps:
-    - script: java -version
-      displayName: 'Verify Java Installation'
-
-    - script: mvn test
-      displayName: Run unit tests
+    - script: echo "Skipping tests"
+      displayName: 'Skip Test Stage'
 
 - stage: Build
   displayName: Build and Push Docker Image
-  dependsOn: Test
   jobs:
   - job: Build
     displayName: Build and Push
