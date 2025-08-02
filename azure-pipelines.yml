@@ -24,11 +24,12 @@ stages:
     pool:
       vmImage: $(vmImageName)
     steps:
-    - task: UseJavaVersion@1
+    - task: JavaToolInstaller@0
       inputs:
-        versionSpec: '23'
-        jdkArchitecture: 'x64'
-        javaPackage: 'JDK'
+        versionSpec: '21'
+        jdkArchitectureOption: 'x64'
+        jdkSourceOption: 'PreInstalled'
+
     - script: ./mvnw test
       displayName: Run unit tests
 
@@ -41,11 +42,11 @@ stages:
     pool:
       vmImage: $(vmImageName)
     steps:
-    - task: UseJavaVersion@1
+    - task: JavaToolInstaller@0
       inputs:
-        versionSpec: '23'
-        jdkArchitecture: 'x64'
-        javaPackage: 'JDK'
+        versionSpec: '21'
+        jdkArchitectureOption: 'x64'
+        jdkSourceOption: 'PreInstalled'
 
     - script: ./mvnw clean package -DskipTests
       displayName: Build Java project
