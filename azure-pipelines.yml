@@ -1,8 +1,8 @@
 trigger:
-- main
+  - main
 
 resources:
-- repo: self
+  - repo: self
 
 variables:
   dockerRegistryServiceConnection: '50c997e3-974c-4065-9e33-96c102bdf223'
@@ -13,60 +13,61 @@ variables:
   vmImageName: 'ubuntu-latest'
 
 stages:
-- stage: Test
-  displayName: Run Tests
-  jobs:
-  - job: Test
-    displayName: Unit Tests
-    pool:
-      name: SelfHostedPool
-    steps:
-    - script: |
-        java -version
-        echo "JAVA_HOME is: $JAVA_HOME"
-      displayName: 'Verify Java Installation'
+  - stage: Test
+    displayName: Run Tests
+    jobs:
+      - job: Test
+        displayName: Unit Tests
+        pool:
+          vmImage: $(vmImageName)
+        steps:
+          - script: |
+              java -version
+              echo "JAVA_HOME is: $JAVA_HOME"
+            displayName: 'Verify Java Installation'
 
-    - task: Maven@3
-      displayName: 'Run Tests'
-      inputs:
-        mavenPomFile: 'pom.xml'
-        goals: 'test'
-        options: '-Dspring.profiles.active=test -X'
-        publishJUnitResults: true
-        testResultsFiles: '**/surefire-reports/TEST-*.xml'
+          - task: Maven@3
+            displayName: 'Run Tests'
+            inputs:
+              mavenPomFile: 'pom.xml'
+              goals: 'test'
+              options: '-Dspring.profiles.active=test -X'
+              publishJUnitResults: true
+              testResultsFiles: '**/surefire-reports/TEST-*.xml'
 
-- stage: Build
-  displayName: Build and Push Docker Image
-  dependsOn: Test
-  jobs:
-  - job: Build
-    displayName: Build and Push
-    pool:
-      name: SelfHostedPool
-    steps:
-    - script: |
-        java -version
-        echo "JAVA_HOME is: $JAVA_HOME"
-      displayName: 'Verify Java Installation'
+  - stage: Build
+    displayName: Build and Push Docker Image
+    dependsOn: Test
+    jobs:
+      - job: Build
+        displayName: Build and Push
+        pool:
+          vmImage: $(vmImageName)
+        steps:
+          - script: |
+              java -version
+              echo "JAVA_HOME is: $JAVA_HOME"
+            displayName: 'Verify Java Installation'
 
-    - task: Maven@3
-      inputs:
-        mavenPomFile: 'pom.xml'
-        goals: 'clean install'
-        options: '-X'
+          - task: Maven@3
+            displayName: 'Build Project'
+            inputs:
+              mavenPomFile: 'pom.xml'
+              goals: 'clean install'
+              options: '-X'
 
-    - task: Docker@2
-      displayName: Build and push Docker image to ACR
-      inputs:
-        command: buildAndPush
-        repository: $(imageRepository)
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          $(tag)
-          latest
-        buildContext: .
-        addPipelineData: true
+          - task: Docker@2
+            displayName: 'Build and Push Docker Image to ACR'
+            inputs:
+              command: buildAndPush
+              repository: $(imageRepository)
+              dockerfile: $(dockerfilePath)
+              containerRegistry: $(dockerRegistryServiceConnection)
+              tags: |
+                $(tag)
+                latest
+              buildContext: .
+              addPipelineData: true
 
-    - publish: $(Build.ArtifactStagingDirectory)
-      artifact: drop
+          - publish: $(Build.ArtifactStagingDirectory)
+            artifact: drop

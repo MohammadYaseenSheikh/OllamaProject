@@ -1,10 +1,14 @@
-# Build stage
-FROM bellsoft/liberica-openjdk-debian:23 AS builder
+# Use Liberica JDK 23 base image
+FROM bellsoft/liberica-openjdk-debian:23
+
+# Set working directory
 WORKDIR /app
+
+# Copy source code
 COPY . .
 
-# Runtime stage
-FROM bellsoft/liberica-openjdk-debian:23
-WORKDIR /app
-COPY --from=builder /app/target/*.jar app.jar
-CMD ["java", "-jar", "app.jar"]
+# Build the JAR (assumes Maven is used)
+RUN ./mvnw clean package -DskipTests
+
+# Run the application
+CMD ["java", "-jar", "target/app.jar"]
