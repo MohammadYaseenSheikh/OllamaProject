@@ -13,5 +13,5 @@ COPY . .
 # Build the JAR using Maven
 RUN mvn clean package -DskipTests
 
-# Run the application (adjust JAR name if needed)
-CMD ["java", "-jar", "target/resume-scanner-1.0.jar"]
+# Run the application using the first JAR found in target/
+CMD ["/bin/bash", "-c", "java -jar $(ls target/*.jar | head -n 1)"]
