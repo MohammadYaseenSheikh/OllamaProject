@@ -19,7 +19,7 @@ stages:
   - job: Test
     displayName: Unit Tests
     pool:
-      name: SelfHostedPool
+      name: Self-Hosted-Agents
     steps:
     - script: |
         java -version
@@ -42,7 +42,7 @@ stages:
   - job: Build
     displayName: Build and Push
     pool:
-      name: SelfHostedPool
+      name: Self-Hosted-Agents
     steps:
     - script: |
         java -version
