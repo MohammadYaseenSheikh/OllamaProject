@@ -52,10 +52,8 @@ stages:
     - task: Maven@3
       inputs:
         mavenPomFile: 'pom.xml'
-        goals: 'clean package'
-        options: '-DskipTests'
-        publishJUnitResults: false
-        mavenVersionOption: 'Default'
+        goals: 'clean install'
+        options: '-X'
 
     - task: Docker@2
       displayName: Build and push Docker image to ACR
