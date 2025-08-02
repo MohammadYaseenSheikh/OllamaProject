@@ -27,13 +27,13 @@ stages:
       displayName: 'Verify Java Installation'
 
     - task: Maven@3
+      displayName: 'Run Tests'
       inputs:
         mavenPomFile: 'pom.xml'
         goals: 'test'
-        options: '-Dspring.profiles.active=test'
+        options: '-Dspring.profiles.active=test -X'
         publishJUnitResults: true
         testResultsFiles: '**/surefire-reports/TEST-*.xml'
-        mavenVersionOption: 'Default'
 
 - stage: Build
   displayName: Build and Push Docker Image
