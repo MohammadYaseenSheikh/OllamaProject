@@ -4,16 +4,14 @@ FROM bellsoft/liberica-openjdk-debian:23
 # Set working directory
 WORKDIR /app
 
+# Install Maven
+RUN apt-get update && apt-get install -y maven
+
 # Copy source code
 COPY . .
 
-# Ensure mvnw is executable and has correct line endings
-RUN apt-get update && apt-get install -y dos2unix \
-    && dos2unix mvnw \
-    && chmod +x mvnw
-
-# Build the JAR (assumes Maven is used)
-RUN ./mvnw clean package -DskipTests
+# Build the JAR using system Maven
+RUN mvn clean package -DskipTests
 
 # Run the application
 CMD ["java", "-jar", "target/app.jar"]
