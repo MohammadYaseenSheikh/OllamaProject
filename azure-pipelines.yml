@@ -21,12 +21,6 @@ stages:
     pool:
       name: SelfHostedPool
     steps:
-    - task: JavaToolInstaller@0
-      inputs:
-        versionSpec: '23'
-        jdkArchitectureOption: 'x64'
-        jdkSourceOption: 'PreInstalled'
-
     - script: |
         java -version
         echo "JAVA_HOME is: $JAVA_HOME"
@@ -39,8 +33,6 @@ stages:
         options: '-Dspring.profiles.active=test'
         publishJUnitResults: true
         testResultsFiles: '**/surefire-reports/TEST-*.xml'
-        javaHomeOption: 'JDKVersion'
-        jdkVersionOption: '1.23'
         mavenVersionOption: 'Default'
 
 - stage: Build
@@ -52,11 +44,10 @@ stages:
     pool:
       name: SelfHostedPool
     steps:
-    - task: JavaToolInstaller@0
-      inputs:
-        versionSpec: '23'
-        jdkArchitectureOption: 'x64'
-        jdkSourceOption: 'PreInstalled'
+    - script: |
+        java -version
+        echo "JAVA_HOME is: $JAVA_HOME"
+      displayName: 'Verify Java Installation'
 
     - task: Maven@3
       inputs:
@@ -64,8 +55,6 @@ stages:
         goals: 'clean package'
         options: '-DskipTests'
         publishJUnitResults: false
-        javaHomeOption: 'JDKVersion'
-        jdkVersionOption: '1.23'
         mavenVersionOption: 'Default'
 
     - task: Docker@2
