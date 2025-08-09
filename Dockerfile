@@ -1,17 +1,11 @@
-# Use Liberica JDK 23 base image
-FROM bellsoft/liberica-openjdk-debian:23
-
-# Set working directory
+# Stage 1: Build the JAR
+FROM maven:3.9.6-eclipse-temurin-23 AS build
 WORKDIR /app
-
-# Install Maven
-RUN apt-get update && apt-get install -y maven
-
-# Copy source code
 COPY . .
-
-# Build the JAR using Maven
 RUN mvn clean package -DskipTests
 
-# Run the application using the first JAR found in target/
-CMD ["/bin/bash", "-c", "java -jar $(ls target/*.jar | head -n 1)"]
+# Stage 2: Run the app
+FROM bellsoft/liberica-openjdk-debian:23
+WORKDIR /app
+COPY --from=build /app/target/*.jar app.jar
+CMD ["java", "-jar", "app.jar"]
