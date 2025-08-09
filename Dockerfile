@@ -1,6 +1,12 @@
-# Stage 1: Build the JAR with Maven (Java 21)
-FROM maven:3.9.6-eclipse-temurin-21 AS build
+# Stage 1: Build the JAR with Java 23 and Maven
+FROM bellsoft/liberica-openjdk-debian:23 AS build
 WORKDIR /app
+
+# Install Maven
+RUN apt-get update && \
+    apt-get install -y maven && \
+    rm -rf /var/lib/apt/lists/*
+
 COPY . .
 RUN mvn clean package -DskipTests
 
