@@ -16,7 +16,7 @@ stages:
       - job: Test
         displayName: Unit Tests
         pool:
-          name: Self-Hosted-Agents
+          vmImage: $(vmImageName)
         steps:
           - script: |
               java -version
@@ -39,7 +39,7 @@ stages:
       - job: Build
         displayName: Build and Push
         pool:
-          name: Self-Hosted-Agents
+          vmImage: $(vmImageName)
         steps:
           - script: |
               java -version
