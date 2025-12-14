@@ -5,6 +5,8 @@ import com.yaseen.code.deepseekproject.com.yaseen.code.deepseekproject.model.Pro
 import com.yaseen.code.deepseekproject.com.yaseen.code.deepseekproject.model.PromptResponse;
 import com.yaseen.code.deepseekproject.com.yaseen.code.deepseekproject.service.AIService;
 import com.yaseen.code.deepseekproject.com.yaseen.code.deepseekproject.service.impl.AIServiceImplementation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -20,19 +22,26 @@ import java.io.IOException;
 public class AIController {
 
     private final AIServiceImplementation aiService;
-
+    private static final Logger logger = LoggerFactory.getLogger(AIServiceImplementation.class);
     public AIController(AIServiceImplementation aiService) {
         this.aiService = aiService;
     }
 
     @PostMapping(value = "/lite", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<PromptResponse> chat(@RequestBody PromptRequest request) {
+        logger.info("Received prompt: {}", request.getPrompt());
         PromptResponse response = new PromptResponse("Something went wrong!");
         String prompt = request.getPrompt();
         if (prompt == null || prompt.isEmpty()) {
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
-        response = aiService.getLiteResponse(prompt);
+        logger.debug("Processing prompt...");
+        try{
+            response = aiService.getLiteResponse(prompt);
+        } catch (Exception e) {
+            logger.error("Error while processing prompt: {}", prompt, e);
+            throw e;
+        }
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
@@ -43,17 +52,23 @@ public class AIController {
     public ResponseEntity<CVResponse> chat(
             @RequestParam("file") MultipartFile resume,
             @RequestParam("job-description") String jobDescription
-    ){
-        CVResponse response = new CVResponse("","","Something went wrong!");
-        if(resume.getSize() > 5 * 1024 * 1024){
+    ) throws IOException {
+        logger.info("Evaluating resume for job description: {}", jobDescription);
+        CVResponse response = new CVResponse("", "", "Something went wrong!");
+        if (resume.getSize() > 5 * 1024 * 1024) {
+            logger.debug("Resume size: {} bytes", resume.getSize());
             response.setErrorMessage("File size exceeds the 5MB limit.");
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
-        try{
+        try {
+            logger.debug("Processing resume...");
             return new ResponseEntity<>(aiService.evaluateResume(resume, jobDescription), HttpStatus.OK);
         } catch (IOException e) {
-            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+            logger.error("Error while processing resume", e);
+            throw e;
+        } catch (Exception e) {
+            logger.error("Unexpected error during resume evaluation", e);
+            throw e;
         }
     }
-
 }
