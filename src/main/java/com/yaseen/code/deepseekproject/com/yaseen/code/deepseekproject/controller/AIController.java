@@ -19,7 +19,11 @@ import java.io.IOException;
 @RequestMapping("/ai")
 public class AIController {
 
-    AIServiceImplementation aiService;
+    private final AIServiceImplementation aiService;
+
+    public AIController(AIServiceImplementation aiService) {
+        this.aiService = aiService;
+    }
 
     @PostMapping(value = "/lite", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<PromptResponse> chat(@RequestBody PromptRequest request) {
