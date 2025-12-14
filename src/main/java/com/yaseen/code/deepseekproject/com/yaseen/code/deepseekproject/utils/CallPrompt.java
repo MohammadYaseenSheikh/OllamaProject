@@ -22,6 +22,12 @@ public class CallPrompt {
     @Value("${OPEN_AI_API_KEY}")
     private String API_KEY;
 
+    @Value("${AI_LITE_MODEL}")
+    private String AI_MODEL;
+
+    @Value("${AI_ADVANCE_MODEL}")
+    private String AI_ADV_MODEL;
+
     public CallPrompt(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
@@ -32,7 +38,7 @@ public class CallPrompt {
         headers.setBearerAuth(API_KEY);
 
         Map<String, Object> requestBody = Map.of(
-                "model", "gpt-4",
+                "model", AI_MODEL,
                 "messages", new Object[]{
                         Map.of("role", "system", "content", "You are a helpful assistant."),
                         Map.of("role", "user", "content", prompt)
@@ -55,7 +61,7 @@ public class CallPrompt {
         headers.setBearerAuth(API_KEY);
 
         Map<String, Object> requestBody = Map.of(
-                "model", "gpt-4",
+                "model", AI_ADV_MODEL,
                 "messages", new Object[]{
                         Map.of("role", "system", "content",
                                 "You are an AI that compares a job description with a resume. " +
