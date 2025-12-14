@@ -19,7 +19,6 @@ import java.io.IOException;
 @RequestMapping("/ai")
 public class AIController {
 
-    @Autowired
     AIServiceImplementation aiService;
 
     @PostMapping(value = "/lite", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

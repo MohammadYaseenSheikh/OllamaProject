@@ -16,9 +16,9 @@ import java.util.Map;
 public class CallPrompt {
 
     private final RestTemplate restTemplate;
-    private final String API_URL = "https://api.together.xyz/v1/chat/completions";
+    private final String API_URL = "https://api.openai.com/v1/chat/completions";
 
-    @Value("${ollama.together.api.key}")
+    @Value("${OPEN_AI_API_KEY}")
     private String API_KEY;
 
     public CallPrompt(RestTemplate restTemplate) {
@@ -31,15 +31,12 @@ public class CallPrompt {
         headers.setBearerAuth(API_KEY);
 
         Map<String, Object> requestBody = Map.of(
-                "model", "meta-llama/Llama-3-8b-chat-hf",
+                "model", "gpt-5.2",
                 "messages", new Object[]{
-                        Map.of("role", "system", "content", "You are an AI assistant that provides clear, concise, and plain text. Please respond as a simple string with no additional formatting."),
+                        Map.of("role", "developer", "content", "You are a helpful assistant."),
                         Map.of("role", "user", "content", prompt)
-                },
-                "temperature", 0.3,
-                "max_tokens", 150
+                }
         );
-
 
         HttpEntity<Map<String, Object>> request = new HttpEntity<>(requestBody, headers);
         ResponseEntity<String> response = null;
@@ -60,23 +57,22 @@ public class CallPrompt {
         headers.setBearerAuth(API_KEY);
 
         Map<String, Object> requestBody = Map.of(
-                "model", "meta-llama/Llama-3-8b-chat-hf",
+                "model", "gpt-5.2",
                 "messages", new Object[]{
                         Map.of("role", "system", "content",
                                 "You are an AI that compares a job description with a resume. "
-                                        + "Your response must be a JSON object with 'score' (1-10) and 'suggestions' (list of improvements). "
+                                        + "Your response must be a JSON object with \\\"score\\\" (1-10) and \\\"suggestions\\\" (list of improvements). "
                                         + "Do NOT include any text outside JSON format."),
                         Map.of("role", "user", "content",
-                                "Compare the following resume and job description:\n\n"
-                                        + "Resume:\n" + resumeText + "\n\n"
-                                        + "Job Description:\n" + jobDescription + "\n\n"
-                                        + "Return only a JSON object like this:\n"
-                                        + "{\"score\": 8, \"suggestions\": [\"Improve skills in Python\", \"Add leadership experience\"]}")
+                                "Compare the following resume and job description:\\n\\n"
+                                        + "Resume:\\n" + resumeText + "\\n\\n"
+                                        + "Job Description:\\n" + jobDescription + "\\n\\n"
+                                        + "Return only a JSON object like this:\\n"
+                                        + "{\\\"score\\\": 8, \\\"suggestions\\\": [\\\"Improve skills in Python\\\", \\\"Add leadership experience\\\"]}" )
                 },
-                "temperature", 0.3,   // Keep it low for consistent responses
-                "top_p", 0.9,         // Keep it high for better relevance
-                "max_tokens", 500,    // Control length
-                "response_format", "json" // If supported by Together.ai
+                "temperature", 0.3,
+                "top_p", 0.9,
+                "max_tokens", 500
         );
 
         HttpEntity<Map<String, Object>> request = new HttpEntity<>(requestBody, headers);
