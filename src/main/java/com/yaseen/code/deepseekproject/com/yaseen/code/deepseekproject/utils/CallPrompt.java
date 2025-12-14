@@ -90,7 +90,7 @@ public class CallPrompt {
                             .model(AI_ADV_MODEL)
                             .temperature(0.3)
                             .topP(0.9)
-                            .maxTokens(500)
+                            .maxCompletionTokens(500)
                             .build()
             );
 
