@@ -160,15 +160,32 @@
                 </configuration>
             </plugin>
 
+            <!-- Build Helper Plugin - for version parsing -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.6.0</version>
+            </plugin>
+
+            <!-- Versions Plugin - for version incrementing -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <version>2.17.1</version>
+                <configuration>
+                    <generateBackupPoms>false</generateBackupPoms>
+                </configuration>
+            </plugin>
+
             <!-- Azure Web App Deployment Plugin -->
             <plugin>
                 <groupId>com.microsoft.azure</groupId>
                 <artifactId>azure-webapp-maven-plugin</artifactId>
                 <version>2.14.1</version>
                 <configuration>
-                    <subscriptionId>PASTE-YOUR-SUBSCRIPTION-ID-HERE</subscriptionId>
-                    <resourceGroup>PASTE-YOUR-RESOURCE-GROUP-HERE</resourceGroup>
-                    <appName>PASTE-YOUR-APP-SERVICE-NAME-HERE</appName>
+                    <subscriptionId>82cb5dc6-7f1a-4d98-acf2-e9170b8f1931</subscriptionId>
+                    <resourceGroup>ResumeScanner</resourceGroup>
+                    <appName>resume-scanner-app</appName>
                 </configuration>
             </plugin>
         </plugins>
